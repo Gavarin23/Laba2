@@ -1,0 +1,120 @@
+abstract class Furniture {
+    // Абстрактный класс "Furniture" (Мебель)          // в абстракотном класс есть инициализация но нет реализации абстрактный класс просто шаблон для других классов 
+    private float len;     // Длина мебели
+    private float width;    // Ширина мебели                  используем приват чтобы можно было оббратитсья через методы 
+    private int price;      // Цена мебели
+
+    // Конструктор инициализации
+    public Furniture(float len, float width, int price) {
+        this.len = len;
+        this.width = width;
+        this.price = price;                                                     
+    }
+    
+    // Конструктор по умолчанию с значениями по умолчанию
+    public Furniture() {
+        this.len = 5.0f;      // Длина по умолчанию: 5.0
+        this.width = 2.0f;     // Ширина по умолчанию: 2.0
+        this.price = 3000;    // Цена по умолчанию: 3000
+    }
+
+    // Метод для получения цены объекта
+    public void getPrice() {
+        System.out.println("Цена объекта: " + price);
+    }
+
+    // Метод для получения площади объекта
+    public void getSquare() {
+        System.out.println("Площадь объекта: " + len * width);
+    }
+
+    // Переопределение метода toString() для вывода информации о мебели
+    @Override
+    public String toString() {
+        return "Был создан новый объект: тип - " + getClass().getName() + ", длина - " + len + ", ширина - " + width + ", цена - " + price;
+    }
+
+    // Абстрактный метод для получения информации о мебели
+    abstract void objectInfo();
+}
+
+class Table extends Furniture {   // дочерний класс перенимает пременные и методы родительского клаас 
+    // Класс "Table" (Стол) наследует от класса "Furniture"
+    private float height;     // Высота стола новая переменная 
+
+    // Конструктор с дополнительным параметром высоты
+    public Table(float len, float width, int price, float height) {
+        super(len, width, price);  // Вызов конструктора родительского класса 
+        this.height = height;
+    }
+
+    // Метод для получения высоты стола
+    public void getHeight() {
+        System.out.println("Высота объекта: " + height);     
+    }
+
+    // Реализация абстрактного метода из родительского класса
+    void objectInfo() {
+        System.out.println(toString());
+    }
+}                                                    // object выводит информацию об объекте
+
+class Chair extends Furniture {        
+    // Класс "Chair" (Стульчик) наследует от класса "Furniture"
+
+    // Пустой метод для получения информации о стульчике
+    void objectInfo() {
+        System.out.println(toString());
+    }
+
+    // Специфичный метод для стульчика
+    public void Convenience() {
+        System.out.println("Супер удобный стульчик");
+    }
+}
+
+class Bed extends Chair {
+    // Класс "Bed" (Кровать) наследует от класса "Chair"       // второй уровень наследования клаас 
+    private static int objectCount = 0;  // Статическая переменная для подсчета созданных кроваток статик пременная относится к классу а не к объекту класса 
+    
+
+    // Переопределение метода Convenience() для кроватки
+    @Override       // используется для переопределения метода 
+    public void Convenience() {
+        System.out.println("Супер удобная кроватка");
+    }
+
+    // Конструктор без аргументов
+    public Bed() {
+        objectCount++;  // Увеличение счетчика при создании новой кроватки
+    }
+    
+    // Геттер для статической переменной
+    public static int getObjectCount() {
+        return objectCount;
+    }
+}
+
+class Main {
+    // Основной класс для демонстрации работы классов
+    public static void main(String[] args) {
+        // Создание экземпляра класса Table
+        Furniture table = new Table(3.5f, 2.0f, 5000, 1.2f);
+
+        // Получение площади и информации о столе
+        table.getSquare();
+        table.objectInfo(); // информация о table
+        System.out.println(); 
+
+        // Создание экземпляра класса Chair
+        Chair chair = new Chair();
+
+        // Использование специфичного метода для стульчика
+        chair.Convenience();
+
+        // Получение информации о стульчике
+        chair.objectInfo();
+        System.out.println();
+
+        // Создание двух экземпляров класса Bed
+        Bed bed```
